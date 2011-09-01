@@ -1,0 +1,6 @@
+
+2011-09-01
+DigiNotar removed. See: https://blog.torproject.org/blog/diginotar-debacle-and-what-you-should-do-about-it
+
+General Decisions
+- We do not include CNNIC: https://bugzilla.mozilla.org/show_bug.cgi?id=542689
