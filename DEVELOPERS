@@ -1,9 +1,9 @@
+WARNING: This is currently just a placeholder with some notes and links. We DO NOT have a verified, recommended implementation template for an alternative TrustManager yet, or even know how it will work. We will provide some more sample code and specific information here shortly. Until then, please look into loading your own KeyStore instance and implementing a custom TrustMnaagerFactory.
 
-We will provide some more sample code and specific information here shortly. Until then, please look into loading your own KeyStore instance and implementing a custom TrustMnaagerFactory.
 
+Some related threads:
 
-Some useful threads:
-
+How to init a new TrustManagerFactory with your own keystore:
 http://groups.google.com/group/android-developers/browse_thread/thread/366a3c8a6b2a7ad/163ff07c8ac39929?lnk=gst&q=SSL+root
 
         TrustManagerFactory mTrustManagerFactory = new 
@@ -17,37 +17,6 @@ TrustManagerFactory(mTrustManagerFactorySpi, null, malg);
                 } 
 
 
+This thread on how to implement a TrustManager is useful, but the "All Trusting" model they
+demonstrate is not recommended:
 http://groups.google.com/group/android-developers/browse_thread/thread/df5852b81f3ad7f9?pli=1
-
-Here is a way to configure to the SSLContext 
-        TrustManager[] trustAllCerts = new TrustManager[] { new 
-X509TrustManager() 
-        { 
-            public java.security.cert.X509Certificate[] 
-getAcceptedIssuers() 
-            { 
-                return acceptedIssuers; 
-            } 
-            public void 
-checkClientTrusted( java.security.cert.X509Certificate[] certs, String 
-authType ) 
-            { 
-            } 
-            public void 
-checkServerTrusted( java.security.cert.X509Certificate[] certs, String 
-authType ) 
-            { 
-            } 
-        } }; 
-        // Install the all-trusting trust manager 
-        try 
-        { 
-            sc = SSLContext.getInstance( "TLS" ); 
-            sc.init( null, trustAllCerts, new 
-java.security.SecureRandom() ); 
-HttpsURLConnection.setDefaultSSLSocketFactory( sc.getSocketFactory() ); 
-        } 
-        catch( Exception e ) 
-        { 
-            e.printStackTrace(); 
-        } 
