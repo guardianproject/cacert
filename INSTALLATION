@@ -1,0 +1,30 @@
+The CACert wiki has full information on how to modify and update your own CACert file:
+https://wiki.cacert.org/FAQ/ImportRootCert?action=show&redirect=ImportRootCert#Android_Phones
+
+Prerequisites:
+
+On Phone
+- Root access
+On Computer
+- Java 1.6
+- Android SDK
+
+HOW TO INSTALL THIS FILE
+
+To write the file to your Android /system partition you have to remount it with read-write permissions.
+
+## remount /system read-write
+$ adb shell mount -o remount,rw /system
+
+## If this command does not work on your phone, use mount to find out how /system is mounted.
+##  E.g. on a Samsung Galaxy S you find a rfs file system and the working syntax was
+## mount -o rw,remount -t rfs /dev/block/stl9 /system
+
+## upload the new certs file
+$ adb push cacerts.bks /system/etc/security/
+
+## remount /system read-only
+$ adb shell mount -o remount,ro /system
+
+## Samsung Galaxy: mount -o ro,remount -t rfs /dev/block/stl9 /system
+Step 6: Reboot your phone
