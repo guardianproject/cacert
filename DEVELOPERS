@@ -1,21 +1,18 @@
 WARNING: This is currently just a placeholder with some notes and links. We DO NOT have a verified, recommended implementation template for an alternative TrustManager yet, or even know how it will work. We will provide some more sample code and specific information here shortly. Until then, please look into loading your own KeyStore instance and implementing a custom TrustMnaagerFactory.
 
+The design goals would
+- to not trust all by default
+- to integrate with Convergence, the EFF's SSL Observatory or some other third-party trusted source for verifying certificate fingerprints, chains, etc
+e to support OTA updating of CACert.bks file on /system partition
+
 
 Some related threads:
 
 How to init a new TrustManagerFactory with your own keystore:
 http://groups.google.com/group/android-developers/browse_thread/thread/366a3c8a6b2a7ad/163ff07c8ac39929?lnk=gst&q=SSL+root
 
-        TrustManagerFactory mTrustManagerFactory = new 
-TrustManagerFactory(mTrustManagerFactorySpi, null, malg); 
-        KeyStore ks = null; 
-                try { 
-                        mTrustManagerFactory.init(ks); 
-                } catch (KeyStoreException e) { 
-                        // TODO Auto-generated catch block 
-                        e.printStackTrace(); 
-                } 
-
+A better bit of sample code here:
+http://stackoverflow.com/questions/4064810/using-client-server-certificates-for-two-way-authentication-ssl-socket-on-android
 
 This thread on how to implement a TrustManager is useful, but the "All Trusting" model they
 demonstrate is not recommended:
