@@ -11,7 +11,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class CustomCACertActivity extends Activity {
+public class SSLTestActivity extends Activity {
 	
 	public static final String TAG = "CACert";
 	
@@ -23,7 +23,7 @@ public class CustomCACertActivity extends Activity {
         
         
         try {
-			CustomTrust cTrust = new CustomTrust(this, R.raw.cacerts, "changethis");
+			CustomTrust cTrust = new CustomTrust(this, R.raw.cacerts, "changeit");
 			
 			Socket s = cTrust.createSocket("google.com", 443);
 			
