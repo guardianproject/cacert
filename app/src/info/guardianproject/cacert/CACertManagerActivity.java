@@ -94,7 +94,7 @@ public class CACertManagerActivity extends Activity {
     	{
             X509Certificate cert = (X509Certificate) certMan.getCertificate(alias);
     		certMan.delete(alias);
-    		showAlert("Success! Cert '" + cert.getSerialNumber() + "' has been eradicated!");
+    		showAlert("Success! The certificate has been removed from the keystore! Now you must 'Save' to make it permanent.");
     	}
     	catch (Exception e)
     	{
