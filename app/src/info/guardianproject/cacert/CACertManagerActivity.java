@@ -62,6 +62,16 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
        
         setContentView(R.layout.main);
 
+        String version = "";
+        
+        try
+        {
+        	version = " v" + getPackageManager().getPackageInfo(this.getPackageName(), 0 ).versionName;
+        }
+        catch (Exception e){}
+        
+        this.setTitle(getString(R.string.app_name) + version);
+        
         mListCerts = (ListView)findViewById(R.id.listCerts);
 
 	    mListCerts.setOnItemClickListener(this);
@@ -138,55 +148,15 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
     	return buff.toString();
     }
     
-    /*
-    public void listCertificates () throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException
-    {
-    
-    	
-        Enumeration<String> e = mCertMan.getCertificateAliases();
-        while (e.hasMoreElements()) {
-        	
-        	StringBuffer out = new StringBuffer();
-        	
-            String alias = e.nextElement();
-            out.append("Alias: ").append(alias).append('\n');
-            
-            X509Certificate cert = (X509Certificate) mCertMan.getCertificate(alias);
-            
-            out.append("Serial: ").append(cert.getSerialNumber()).append('\n');
-            out.append("IssuerDN: ").append(cert.getIssuerDN().toString()).append('\n');
-            out.append("SubjectDN: ").append(cert.getSubjectDN().toString()).append('\n');
-            out.append("Expires: ").append(cert.getNotAfter().toGMTString()).append('\n');
-
-            
-            X500Principal subject = cert.getSubjectX500Principal();
-            X500Principal issuer = cert.getIssuerX500Principal();
-            
-           
-        }
-    }*/
-    
-    private void deleteAlias (String alias)
-    {
-    	try
-    	{
-            X509Certificate cert = (X509Certificate) mCertMan.getCertificate(alias);
-            mCertMan.delete(alias);
-    		showAlert(getString(R.string.success_remove));
-    	}
-    	catch (Exception e)
-    	{
-    		showAlert(getString(R.string.error_deleting_cert) + e.getMessage());
-    		Log.e(TAG, "error deleting cert", e);
-    	}
-    }
-    
+   
     private void deleteCertificate (Certificate cert)
     {
     	try
     	{
             mCertMan.delete(cert);
     		showAlert(getString(R.string.success_remove));
+    		
+    		loadList(null);
     	}
     	catch (Exception e)
     	{
@@ -224,46 +194,18 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
              .create().show();
     }
     
-    private void doDelete ()
-    {
-    	 LayoutInflater factory = LayoutInflater.from(this);
-         final View textEntryView = factory.inflate(R.layout.alert_dialog_text_entry, null);
-         new AlertDialog.Builder(this)
-             .setTitle(getString(R.string.app_name))
-             .setView(textEntryView)
-             .setMessage(getString(R.string.enter_a_cert_alias_to_delete))
-             .setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
-                 public void onClick(DialogInterface dialog, int whichButton) {
-
-                 	EditText eText = ((android.widget.EditText)textEntryView.findViewById(R.id.dialog_edit));
-                 	String alias = eText.getText().toString();
-                 	
-                 	deleteAlias(alias);
-                 	
-                 }
-             })
-             .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                 public void onClick(DialogInterface dialog, int whichButton) {
-
-                 }
-             })
-             .create().show();
-    }
-    
+   
     private void saveKeystore ()
     {
 
     	try
     	{
-    		File tmpFile = new File(getFilesDir(),CACERT_TMP_PATH);
-    		String tmppath = tmpFile.getAbsolutePath();
-    		mCertMan.save(tmppath, DEFAULT_PASS);
     		
-    		mCertMan.remountAndCopy(tmppath, CACERT_SYSTEM_PATH);
+    		mCertMan.remountRW(CACERT_SYSTEM_PATH);
+    		mCertMan.save(CACERT_SYSTEM_PATH, DEFAULT_PASS);
     		
-    		showAlert(getString(R.string.success_cacert_keystore_saved_to_system));
+    		showAlert(getString(R.string.success_cacert_keystore_saved_to_system) + ' ' + CACERT_SYSTEM_PATH);
     		
-    		tmpFile.delete();
     		
     	}
     	catch (Exception e)
@@ -278,10 +220,12 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
 
     	try
     	{
-    		String bakPath = new File(getFilesDir(),CACERT_BACKUP_PATH).getAbsolutePath();
-    		mCertMan.save(bakPath, DEFAULT_PASS);
+    		File fileBak = new File(getFilesDir(),CACERT_BACKUP_PATH);
+    		
+    		fileBak.mkdirs();
+    		mCertMan.save(fileBak.getAbsolutePath(), DEFAULT_PASS);
 
-    		showAlert(getString(R.string.success_system_cacert_keystore_backed_up_to) + bakPath);
+    		showAlert(getString(R.string.success_system_cacert_keystore_backed_up_to) + fileBak.getAbsolutePath());
     	}
     	catch (Exception e)
     	{
@@ -296,7 +240,10 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
     	{
     		String bakPath = new File(getFilesDir(),CACERT_BACKUP_PATH).getAbsolutePath();
 
-    		mCertMan.remountAndCopy(bakPath, CACERT_SYSTEM_PATH);
+    		mCertMan.remountRW(CACERT_SYSTEM_PATH);
+    		
+    		mCertMan.load(bakPath, DEFAULT_PASS);
+    		mCertMan.save(CACERT_SYSTEM_PATH, DEFAULT_PASS);
     		
     		showAlert(getString(R.string.success_system_cacert_restored_from) + bakPath);
     	}
@@ -417,10 +364,12 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
 			message.append("\n");
 			
 			message.append(getString(R.string.serial));
+			message.append(' ');
 			message.append(mSelectedCert.getSerialNumber());
 			message.append("\n");
 			
 			message.append(getString(R.string.expires));
+			message.append(' ');
 			message.append(mSelectedCert.getNotAfter().toGMTString());
 			message.append("\n");
 			

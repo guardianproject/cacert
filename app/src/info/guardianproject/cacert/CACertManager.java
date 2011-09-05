@@ -79,29 +79,41 @@ public class CACertManager {
     
     public void save (String targetPath, String password) throws NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException
     {
-    	if (!new File(targetPath).canWrite())
+    	File fileNew = new File(targetPath);
+    	
+    	if (fileNew.exists() && (!fileNew.canWrite()))
+    		throw new FileNotFoundException("Cannot write to: " + targetPath);
+    	else if (fileNew.getParentFile().exists() && (!fileNew.getParentFile().canWrite()))
     		throw new FileNotFoundException("Cannot write to: " + targetPath);
     	
     	OutputStream trustStoreStream = new FileOutputStream(new File(targetPath));
     	ksCACert.store(trustStoreStream, password.toCharArray());
     }
     
-    public void remountAndCopy (String srcPath, String targetPath) throws IOException
+    public void remountRW (String targetPath) throws IOException
     {
     
-    //	String cmd = "mount -o rw,remount -t ext3 /dev/block/mmcblk1p21 /system";
+    	File fileTarget = new File(targetPath);
     	
     	Process p = Runtime.getRuntime().exec("su");
     	DataOutputStream os = new DataOutputStream(p.getOutputStream());
-    	os.writeBytes(CMD_REMOUNT_RW + "\n");    
-    	os.writeBytes(CMD_CHANGE_PERMS + ' ' + targetPath + '\n');
     	
-    	if (!new File(targetPath).canWrite())
-    		throw new FileNotFoundException("Cannot write to: " + targetPath);
+    	if (!fileTarget.canWrite())
+    	{
+    		os.writeBytes(CMD_REMOUNT_RW + "\n");    
+    		os.writeBytes(CMD_CHANGE_PERMS + ' ' + targetPath + '\n');
+    		os.writeBytes("exit\n"); 
+    		os.flush();
+    		
+    		if (!fileTarget.canWrite())
+    			throw new FileNotFoundException("Cannot write to: " + targetPath);
     	
-    	os.writeBytes("cp " + srcPath + ' ' + targetPath + '\n');
-    	os.writeBytes("exit\n");  
-    	os.flush();
+    		
+    	}
+    	
+    	
+    	 
+    	
     }
     
     //mount -o rw,remount -t yaffs2 /dev/block/mtdblock3 /system
