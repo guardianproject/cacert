@@ -52,6 +52,8 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
 	
     private ListView mListCerts;
 
+    private String mKeyword = null;
+    
     private  ArrayList<X509Certificate> alCerts;
     private X509Certificate mSelectedCert;
     
@@ -158,7 +160,7 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
             mCertMan.delete(cert);
     		showAlert(getString(R.string.success_remove));
     		
-    		loadList(null);
+    		loadList(mKeyword);
     	}
     	catch (Exception e)
     	{
@@ -178,11 +180,11 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
                  public void onClick(DialogInterface dialog, int whichButton) {
 
                  	EditText eText = ((android.widget.EditText)textEntryView.findViewById(R.id.dialog_edit));
-                 	String keyword = eText.getText().toString();
+                 	mKeyword = eText.getText().toString();
                  	
                  	try
                  	{
-                 		loadList(keyword);
+                 		loadList(mKeyword);
                  	}
                  	catch (Exception e){}
                  	
@@ -202,17 +204,26 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
 
     	try
     	{
+    		File fileBak = new File(getFilesDir(),CACERT_TMP_PATH);
     		
-    		mCertMan.remountRW(CACERT_SYSTEM_PATH);
-    		mCertMan.save(CACERT_SYSTEM_PATH, DEFAULT_PASS);
+    		mCertMan.save(fileBak.getAbsolutePath(), DEFAULT_PASS);
     		
-    		showAlert(getString(R.string.success_cacert_keystore_saved_to_system) + ' ' + CACERT_SYSTEM_PATH);
+    		boolean success = mCertMan.remountRWandCopy(fileBak.getAbsolutePath(), CACERT_SYSTEM_PATH);
     		
+    		Thread.sleep(1000);//wait one second
     		
+    		mCertMan.load(CACERT_SYSTEM_PATH, DEFAULT_PASS);
+    		
+    		if (success)
+    			showAlert(getString(R.string.success_cacert_keystore_saved_to_system) + ' ' + CACERT_SYSTEM_PATH);
+    		else
+    			showAlert(getString(R.string.failure_to_save));
+    		
+    		loadList(mKeyword);
     	}
     	catch (Exception e)
     	{
-    		showAlert(getString(R.string.failure_to_save) + e.getMessage());
+    		showAlert(getString(R.string.failure_to_save) + ": " + e.getMessage());
     		Log.e(TAG,"error saving",e);
     	}
     }
@@ -224,7 +235,6 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
     	{
     		File fileBak = new File(getFilesDir(),CACERT_BACKUP_PATH);
     		
-    		fileBak.mkdirs();
     		mCertMan.save(fileBak.getAbsolutePath(), DEFAULT_PASS);
 
     		showAlert(getString(R.string.success_system_cacert_keystore_backed_up_to) + fileBak.getAbsolutePath());
@@ -240,14 +250,21 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
 
     	try
     	{
+
     		String bakPath = new File(getFilesDir(),CACERT_BACKUP_PATH).getAbsolutePath();
 
-    		mCertMan.remountRW(CACERT_SYSTEM_PATH);
+    		boolean success = mCertMan.remountRWandCopy(bakPath, CACERT_SYSTEM_PATH);
     		
-    		mCertMan.load(bakPath, DEFAULT_PASS);
-    		mCertMan.save(CACERT_SYSTEM_PATH, DEFAULT_PASS);
+    		Thread.sleep(1000);//wait one second
     		
-    		showAlert(getString(R.string.success_system_cacert_restored_from) + bakPath);
+    		mCertMan.load(CACERT_SYSTEM_PATH, DEFAULT_PASS);
+    		
+    		if (success)
+    			showAlert(getString(R.string.success_system_cacert_restored_from) + bakPath);
+    		else
+    			showAlert(getString(R.string.failure_to_save));
+    		
+    		loadList(mKeyword);
     	}
     	catch (Exception e)
     	{
@@ -265,7 +282,7 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
 			showAlert(getString(R.string.loading_cacert_keystore_from_system));
 
 			mCertMan.load(CACERT_SYSTEM_PATH, DEFAULT_PASS);
-			loadList(null);
+			loadList(mKeyword);
 			
 		}
 		catch (Exception e)
@@ -277,7 +294,7 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
 	
 	private void showAlert (String msg)
 	{
-		Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 		
 	}
 	 @Override

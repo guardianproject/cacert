@@ -3,6 +3,7 @@
 
 package info.guardianproject.cacert;
 
+import java.io.BufferedInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,17 +11,24 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+import java.util.Date;
 import java.util.Enumeration;
 
 import java.security.cert.Certificate;
 
+import android.util.Log;
+
 public class CACertManager {
 
+	private final static String TAG = "CACert";
+	
     KeyStore ksCACert;
     private final static String KEYSTORE_TYPE = "BKS";
     
@@ -28,7 +36,17 @@ public class CACertManager {
     private final static String CMD_REMOUNT_RO = "grep \" /system \" /proc/mounts | awk '{system(\"mount -o ro,remount -t \"$3\" \"$1\" \"$2)}'";
     
     private final static String CMD_CHANGE_PERMS = "chmod 777";
+    private final static String CMD_CHANGE_PERMS_ALL_READ = "chmod a+r";
     
+    public CACertManager ()
+    {
+    	try {
+			Process p = Runtime.getRuntime().exec("su");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+    }
     public void load (String path, String password) throws NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException
     {
     	ksCACert = KeyStore.getInstance(KEYSTORE_TYPE);
@@ -90,29 +108,33 @@ public class CACertManager {
     	ksCACert.store(trustStoreStream, password.toCharArray());
     }
     
-    public void remountRW (String targetPath) throws IOException
-    {
     
-    	File fileTarget = new File(targetPath);
+    public boolean remountRWandCopy (String srcPath, String targetPath) throws IOException
+    {
     	
     	Process p = Runtime.getRuntime().exec("su");
     	DataOutputStream os = new DataOutputStream(p.getOutputStream());
     	
-    	if (!fileTarget.canWrite())
-    	{
-    		os.writeBytes(CMD_REMOUNT_RW + "\n");    
-    		os.writeBytes(CMD_CHANGE_PERMS + ' ' + targetPath + '\n');
-    		os.writeBytes("exit\n"); 
-    		os.flush();
-    		
-    		if (!fileTarget.canWrite())
-    			throw new FileNotFoundException("Cannot write to: " + targetPath);
+    	//remote system partition read write
+    	os.writeBytes(CMD_REMOUNT_RW + '\n'); 
     	
-    		
-    	}
+    	//change perms on the target file for all to write
+		os.writeBytes(CMD_CHANGE_PERMS + ' ' + targetPath + '\n');
+		
+		//copy the source file over the target
+    	os.writeBytes("cp " + srcPath + ' ' + targetPath + '\n');
+    	
+    	//change perms on the target file to all read only
+    	os.writeBytes(CMD_CHANGE_PERMS_ALL_READ + ' ' + targetPath + '\n');
+    	
+    	//remount file system read only
+    	os.writeBytes(CMD_REMOUNT_RO + '\n'); 
+    	
+    	os.writeBytes("exit\n");
+    	os.flush();
     	
     	
-    	 
+    	return true;
     	
     }
     
