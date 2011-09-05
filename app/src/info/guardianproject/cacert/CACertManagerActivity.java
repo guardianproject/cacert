@@ -8,6 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.security.auth.x500.X500Principal;
@@ -15,17 +16,26 @@ import javax.security.auth.x500.X500Principal;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CACertManagerActivity extends Activity {
+public class CACertManagerActivity extends Activity implements OnItemClickListener, OnItemLongClickListener {
 	
 	public static final String TAG = "CACert";
 	
@@ -35,20 +45,30 @@ public class CACertManagerActivity extends Activity {
 	
 	private final static String DEFAULT_PASS = "changeit";
 	
-	private CACertManager certMan;
+	private CACertManager mCertMan;
+	
+    private ListView mListCerts;
+
+    private  ArrayList<X509Certificate> alCerts;
+    private X509Certificate mSelectedCert;
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        
         setContentView(R.layout.main);
+
+        mListCerts = (ListView)findViewById(R.id.listCerts);
+
+	    mListCerts.setOnItemClickListener(this);
+	    mListCerts.setOnItemLongClickListener(this);
         
         try
         {
-        	certMan = new CACertManager ();
-	        certMan.load(CACERT_SYSTEM_PATH, DEFAULT_PASS);
-	       
-	       
+        	mCertMan = new CACertManager ();
+        	
+          
         }
         catch (Exception e)
         {
@@ -56,13 +76,71 @@ public class CACertManagerActivity extends Activity {
         }
     }
     
+    
+    
+    private void loadList (String keyword) throws Exception
+    {
+    	
+    	  Enumeration<String> aliases = mCertMan.getCertificateAliases();
+          
+          alCerts = new ArrayList<X509Certificate>();
+          
+          while (aliases.hasMoreElements())
+          {
+        	  X509Certificate cert = (X509Certificate)mCertMan.getCertificate(aliases.nextElement());
+        	  
+        	  if (keyword == null || keyword.length() == 0)
+        		  alCerts.add(cert);
+        	  else
+        	  {
+        		  if (cert.getIssuerDN().toString().indexOf(keyword)!=-1
+        			  && cert.getSubjectDN().toString().indexOf(keyword)!=-1)
+        			  alCerts.add(cert);
+        	  }
+          }
+          
+          if (alCerts.size() == 0)
+          {
+        	  Toast.makeText(this, getString(R.string.no_certificates_matched_the_search), Toast.LENGTH_SHORT).show();
+          }
+         
+          String[] names = new String[alCerts.size()];
+          int i = 0;
+          
+          for (X509Certificate cert : alCerts)
+          {
+          	names[i++] = processCert(cert);
+          			
+          }
+          
+          mListCerts.setAdapter(new ArrayAdapter<String>(this,
+       				android.R.layout.simple_list_item_1, names));
+          
+       		
+    }
+    
+    private String processCert(X509Certificate cert)
+    {
+    	StringBuffer buff = new StringBuffer();
+    	
+    	String name = cert.getSubjectDN().getName();
+    	
+    	name=name.substring(name.indexOf("CN=")+3);
+    	
+    	if (name.indexOf(";")!=-1)
+    		name=name.substring(0,name.indexOf(";"));
+    	
+    	buff.append(name);
+    	
+    	return buff.toString();
+    }
+    
+    /*
     public void listCertificates () throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException
     {
     
-    	TextView txtCa = (TextView)this.findViewById(R.id.cabox);
-    	txtCa.setText("");
     	
-        Enumeration<String> e = certMan.getCertificateAliases();
+        Enumeration<String> e = mCertMan.getCertificateAliases();
         while (e.hasMoreElements()) {
         	
         	StringBuffer out = new StringBuffer();
@@ -70,7 +148,7 @@ public class CACertManagerActivity extends Activity {
             String alias = e.nextElement();
             out.append("Alias: ").append(alias).append('\n');
             
-            X509Certificate cert = (X509Certificate) certMan.getCertificate(alias);
+            X509Certificate cert = (X509Certificate) mCertMan.getCertificate(alias);
             
             out.append("Serial: ").append(cert.getSerialNumber()).append('\n');
             out.append("IssuerDN: ").append(cert.getIssuerDN().toString()).append('\n');
@@ -81,26 +159,68 @@ public class CACertManagerActivity extends Activity {
             X500Principal subject = cert.getSubjectX500Principal();
             X500Principal issuer = cert.getIssuerX500Principal();
             
-            txtCa.append(out.toString());
-            txtCa.append("\n--------------------------------\n");
-            
            
         }
-    }
+    }*/
     
     private void deleteAlias (String alias)
     {
     	try
     	{
-            X509Certificate cert = (X509Certificate) certMan.getCertificate(alias);
-    		certMan.delete(alias);
-    		showAlert("Success! The certificate has been removed from the keystore! Now you must 'Save' to make it permanent.");
+            X509Certificate cert = (X509Certificate) mCertMan.getCertificate(alias);
+            mCertMan.delete(alias);
+    		showAlert(getString(R.string.success_remove));
     	}
     	catch (Exception e)
     	{
-    		showAlert("error deleting cert: " + e.getMessage());
+    		showAlert(getString(R.string.error_deleting_cert) + e.getMessage());
+    		Log.e(TAG, "error deleting cert", e);
     	}
     }
+    
+    private void deleteCertificate (Certificate cert)
+    {
+    	try
+    	{
+            mCertMan.delete(cert);
+    		showAlert(getString(R.string.success_remove));
+    	}
+    	catch (Exception e)
+    	{
+    		showAlert(getString(R.string.error_deleting_cert) + e.getMessage());
+    	}
+    }
+    
+    private void doSearch ()
+    {
+    	 LayoutInflater factory = LayoutInflater.from(this);
+         final View textEntryView = factory.inflate(R.layout.alert_dialog_text_entry, null);
+         new AlertDialog.Builder(this)
+             .setTitle(getString(R.string.app_name))
+             .setView(textEntryView)
+             .setMessage(getString(R.string.enter_keyword_to_search_for))
+             .setPositiveButton(getString(R.string.search), new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog, int whichButton) {
+
+                 	EditText eText = ((android.widget.EditText)textEntryView.findViewById(R.id.dialog_edit));
+                 	String keyword = eText.getText().toString();
+                 	
+                 	try
+                 	{
+                 		loadList(keyword);
+                 	}
+                 	catch (Exception e){}
+                 	
+                 }
+             })
+             .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog, int whichButton) {
+
+                 }
+             })
+             .create().show();
+    }
+    
     private void doDelete ()
     {
     	 LayoutInflater factory = LayoutInflater.from(this);
@@ -108,18 +228,18 @@ public class CACertManagerActivity extends Activity {
          new AlertDialog.Builder(this)
              .setTitle(getString(R.string.app_name))
              .setView(textEntryView)
-             .setMessage("Enter a cert alias to delete")
-             .setPositiveButton(("Delete"), new DialogInterface.OnClickListener() {
+             .setMessage(getString(R.string.enter_a_cert_alias_to_delete))
+             .setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
                  public void onClick(DialogInterface dialog, int whichButton) {
 
-                 	EditText eText = ((android.widget.EditText)textEntryView.findViewById(R.id.password_edit));
+                 	EditText eText = ((android.widget.EditText)textEntryView.findViewById(R.id.dialog_edit));
                  	String alias = eText.getText().toString();
                  	
                  	deleteAlias(alias);
                  	
                  }
              })
-             .setNegativeButton(("Cancel"), new DialogInterface.OnClickListener() {
+             .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                  public void onClick(DialogInterface dialog, int whichButton) {
 
                  }
@@ -134,18 +254,19 @@ public class CACertManagerActivity extends Activity {
     	{
     		File tmpFile = new File(getFilesDir(),CACERT_TMP_PATH);
     		String tmppath = tmpFile.getAbsolutePath();
-    		certMan.save(tmppath, DEFAULT_PASS);
+    		mCertMan.save(tmppath, DEFAULT_PASS);
     		
-    		certMan.remountAndCopy(tmppath, CACERT_SYSTEM_PATH);
+    		mCertMan.remountAndCopy(tmppath, CACERT_SYSTEM_PATH);
     		
-    		showAlert("Success! CACert keystore saved to /system");
+    		showAlert(getString(R.string.success_cacert_keystore_saved_to_system));
     		
     		tmpFile.delete();
     		
     	}
     	catch (Exception e)
     	{
-    		showAlert("Failure to save: " + e.getMessage());
+    		showAlert(getString(R.string.failure_to_save) + e.getMessage());
+    		Log.e(TAG,"error saving",e);
     	}
     }
     
@@ -154,16 +275,34 @@ public class CACertManagerActivity extends Activity {
 
     	try
     	{
-    		String path = new File(getFilesDir(),CACERT_BACKUP_PATH).getAbsolutePath();
-    		certMan.save(path, DEFAULT_PASS);
-    		
-    		showAlert("Success! CACert keystore saved to: " + path);
+    		String bakPath = new File(getFilesDir(),CACERT_BACKUP_PATH).getAbsolutePath();
+    		mCertMan.save(bakPath, DEFAULT_PASS);
+
+    		showAlert(getString(R.string.success_system_cacert_keystore_backed_up_to) + bakPath);
     	}
     	catch (Exception e)
     	{
-    		showAlert("Failure to save: " + e.getMessage());
+    		showAlert(getString(R.string.failure_to_save) + e.getMessage());
     	}
     }
+    
+    private void restoreKeystore ()
+    {
+
+    	try
+    	{
+    		String bakPath = new File(getFilesDir(),CACERT_BACKUP_PATH).getAbsolutePath();
+
+    		mCertMan.remountAndCopy(bakPath, CACERT_SYSTEM_PATH);
+    		
+    		showAlert(getString(R.string.success_system_cacert_restored_from) + bakPath);
+    	}
+    	catch (Exception e)
+    	{
+    		showAlert(getString(R.string.failure_to_save) + e.getMessage());
+    	}
+    }
+
 
 	@Override
 	protected void onResume() {
@@ -171,12 +310,16 @@ public class CACertManagerActivity extends Activity {
 		
 		try 
 		{
-			showAlert("Loading CACert keystore from /system");
-			listCertificates();
+			showAlert(getString(R.string.loading_cacert_keystore_from_system));
+
+			mCertMan.load(CACERT_SYSTEM_PATH, DEFAULT_PASS);
+			loadList(null);
+			
 		}
 		catch (Exception e)
 		{
-			showAlert("Error loading certs: " + e.getMessage());
+			showAlert(getString(R.string.error_loading_certs) + e.getMessage());
+			Log.e(TAG,"error loading",e);
 		}
 	}
 	
@@ -207,12 +350,102 @@ public class CACertManagerActivity extends Activity {
 	    		backupKeystore ();
 	    		return true;
 	    		
-	    	case R.id.menu_delete:
-	    		doDelete();
+	    	case R.id.menu_restore:
+	    		restoreKeystore ();
 	    		return true;
 	    		
+	    	case R.id.menu_search:
+	    		doSearch();
+	    		return true;
+	    		
+	    	case R.id.menu_about:
+	    		showDialog(getString(R.string.about));
+	    		return true;
+	    	
+	    	case R.id.menu_help:
+	    		showDialog(getString(R.string.help));
+	    		return true;
 	    	}
 	    	return super.onOptionsItemSelected(item);
 	    }
+
+
+
+		@Override
+		public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			
+			mSelectedCert = alCerts.get(arg2);
+			
+			 new AlertDialog.Builder(this)
+             .setTitle(getString(R.string.app_name))
+             .setMessage(getString(R.string.are_you_sure_delete) + processCert(mSelectedCert))
+             .setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog, int whichButton) {
+
+                 	deleteCertificate(mSelectedCert);
+                 	mSelectedCert = null;
+                 	
+                 }
+             })
+             .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog, int whichButton) {
+
+                 }
+             })
+             .create().show();
+			
+			return true;
+		}
+
+
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			mSelectedCert = alCerts.get(arg2);
+			
+			StringBuffer message = new StringBuffer();
+			
+			message.append(mSelectedCert.getSubjectDN().toString());
+			message.append("\n");
+			
+			message.append(mSelectedCert.getIssuerDN().toString());
+			message.append("\n");
+			
+			message.append(getString(R.string.serial));
+			message.append(mSelectedCert.getSerialNumber());
+			message.append("\n");
+			
+			message.append(getString(R.string.expires));
+			message.append(mSelectedCert.getNotAfter().toGMTString());
+			message.append("\n");
+			
+			
+			 new AlertDialog.Builder(this)
+             .setTitle(getString(R.string.app_name))
+             .setMessage(message.toString())
+             .create().show();
+		}
+		
+		private void showDialog (String msg)
+		{
+			 new AlertDialog.Builder(this)
+             .setTitle(getString(R.string.app_name))
+             .setMessage(msg)
+             .create().show();
+		}
+
+
+		@Override
+		protected void onDestroy() {
+			
+			super.onDestroy();
+			
+			try { mCertMan.remountSystemRO(); }
+			catch (Exception e){}
+			
+		}
     
+	  
 }
