@@ -1,0 +1,9 @@
+
+v0.0.1
+- loads and parses certificate file from /system
+- backs up current /system file to app data space
+- restores from app data space to /system file
+- displays certs as list
+- supports search by keyword against issuer and subject DN
+- supports delete from in memory store
+- supports save of in memory store to /system
