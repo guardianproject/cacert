@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CACertManager</string>
+    <string name="app_name">CACertMan</string>
     
     <string name="about">CACertMAnager 0.0.1\nDeveloped by the Guardian Project\nhttps://guardianproject.info\nGPL v3 Licensed 2011</string>
    
@@ -21,7 +21,7 @@
     
     <string name="delete">Delete</string>
     
-    <string name="success_cacert_keystore_saved_to_system">Success! CACert keystore saved to /system</string>
+    <string name="success_cacert_keystore_saved_to_system">Success! CACert keystore saved system:</string>
     
     <string name="failure_to_save">Failure to save: </string>
     
@@ -38,5 +38,5 @@
     
     <string name="expires">Expires:</string>
     
-    <string name="serial">Serial: </string>
+    <string name="serial">Serial:</string>
 </resources>
