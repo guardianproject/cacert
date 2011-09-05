@@ -97,7 +97,11 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
     
     private void loadList (String keyword) throws Exception
     {
-    	
+    	  String certtext;
+    	  String lkeyword = "";
+    	  if (!(keyword == null || keyword.length() == 0))
+    	  	lkeyword = keyword.toLowerCase();
+    	  
     	  Enumeration<String> aliases = mCertMan.getCertificateAliases();
           
           alCerts = new ArrayList<X509Certificate>();
@@ -110,8 +114,9 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
         		  alCerts.add(cert);
         	  else
         	  {
-        		  if (cert.getIssuerDN().toString().indexOf(keyword)!=-1
-        			  && cert.getSubjectDN().toString().indexOf(keyword)!=-1)
+        		  certtext = cert.getIssuerDN().toString().toLowerCase();
+        		  certtext.concat(cert.getSubjectDN().toString().toLowerCase());
+        		  if (certtext.contains(lkeyword))
         			  alCerts.add(cert);
         	  }
           }
