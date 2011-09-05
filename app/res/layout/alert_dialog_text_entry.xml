@@ -30,6 +30,8 @@
         android:scrollHorizontally="true"
         android:autoText="false"
         android:capitalize="none"
+        android:maxLines="1"
+        android:singleLine="true"
         android:gravity="fill_horizontal"
         android:textAppearance="?android:attr/textAppearanceMedium" />
         
