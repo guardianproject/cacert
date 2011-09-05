@@ -60,6 +60,8 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        
+        Eula.show(this);
+        
         setContentView(R.layout.main);
 
         String version = "";
