@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, CustomCACertActivity!</string>
-    <string name="app_name">CustomCACert</string>
+    <string name="app_name">CACertManager</string>
+    
+    <string name="about">CACertMAnager 0.0.1\nDeveloped by the Guardian Project\nhttps://guardianproject.info\nGPL v3 Licensed 2011</string>
+   
+    <string name="help">!THIS APP REQUIRES ROOT!\n\nThis app allows you to browser, backup, restore and delete entries from your system\'s Certificate Authority keystore.\n\nTap a certificate to view more data.\n\nLong press to delete, then use Menu-&gt;Save to make it permanent.\n\nIf you are having trouble saving, try the app \'Root Explorer\' and use that to mount your /system into Read-Write mode</string> 
+    <string name="no_certificates_matched_the_search">No certificates matched the search</string>
+    
+    <string name="success_remove">"Success! The certificate has been removed from the keystore! Now you must 'Save' to make it permanent."</string>
+    
+    <string name="error_deleting_cert">error deleting cert: </string>
+    
+    <string name="enter_keyword_to_search_for">Enter keyword to search for</string>
+    
+    <string name="search">Search</string>
+    
+    <string name="cancel">Cancel</string>
+    
+    <string name="enter_a_cert_alias_to_delete">Enter a cert alias to delete</string>
+    
+    <string name="delete">Delete</string>
+    
+    <string name="success_cacert_keystore_saved_to_system">Success! CACert keystore saved to /system</string>
+    
+    <string name="failure_to_save">Failure to save: </string>
+    
+    <string name="success_system_cacert_keystore_backed_up_to">Success! System CACert keystore backed up to: </string>
+    
+    <string name="success_system_cacert_restored_from">Success! System CACert restored from: </string>
+    
+    <string name="loading_cacert_keystore_from_system">Loading CACert keystore from /system</string>
+    
+    <string name="error_loading_certs">Error loading certs: </string>
+    
+    <string name="are_you_sure_delete">Are you sure you want to delete this certificate?
+</string>
+    
+    <string name="expires">Expires:</string>
+    
+    <string name="serial">Serial: </string>
 </resources>
