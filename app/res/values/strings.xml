@@ -5,6 +5,7 @@
     <string name="about">CACertMAnager 0.0.1\nDeveloped by the Guardian Project\nhttps://guardianproject.info\nGPL v3 Licensed 2011</string>
    
     <string name="help">!THIS APP REQUIRES ROOT!\n\nThis app allows you to browser, backup, restore and delete entries from your system\'s Certificate Authority keystore.\n\nTap a certificate to view more data.\n\nLong press to delete, then use Menu-&gt;Save to make it permanent.\n\nIf you are having trouble saving, try the app \'Root Explorer\' and use that to mount your /system into Read-Write mode</string> 
+    
     <string name="no_certificates_matched_the_search">No certificates matched the search</string>
     
     <string name="success_remove">"Success! The certificate has been removed from the keystore! Now you must 'Save' to make it permanent."</string>
@@ -39,4 +40,9 @@
     <string name="expires">Expires:</string>
     
     <string name="serial">Serial:</string>
+    
+    <string name="eula_title">You agree to:</string>
+    <string name="eula_accept">Accept</string>
+    <string name="eula_refuse">Refuse</string>
+    
 </resources>
