@@ -96,6 +96,53 @@ public class CACertManagerActivity extends Activity implements OnEulaAgreedTo, R
         }
     }
     
+    /*
+    private void loadList (String keyword) throws Exception
+    {
+    	  String certtext;
+    	  String lkeyword = "";
+    	  if (!(keyword == null || keyword.length() == 0))
+    	  	lkeyword = keyword.toLowerCase();
+    	  
+    	  Enumeration<String> aliases = mCertMan.getCertificateAliases();
+          
+          alCerts = new ArrayList<X509Certificate>();
+          
+          while (aliases.hasMoreElements())
+          {
+        	  X509Certificate cert = (X509Certificate)mCertMan.getCertificate(aliases.nextElement());
+        	  
+        	  if (keyword == null || keyword.length() == 0)
+        		  alCerts.add(cert);
+        	  else
+        	  {
+        		  certtext = cert.getIssuerDN().toString().toLowerCase();
+        		  certtext.concat(cert.getSubjectDN().toString().toLowerCase());
+        		  if (certtext.contains(lkeyword))
+        			  alCerts.add(cert);
+        	  }
+          }
+          
+          if (alCerts.size() == 0)
+          {
+        	  Toast.makeText(this, getString(R.string.no_certificates_matched_the_search), Toast.LENGTH_SHORT).show();
+          }
+         
+          String[] names = new String[alCerts.size()];
+          int i = 0;
+          
+          for (X509Certificate cert : alCerts)
+          {
+          	names[i++] = processCert(cert);
+          			
+          }
+          
+          mListCerts.setAdapter(new ArrayAdapter<String>(this,
+       				android.R.layout.simple_list_item_1, names));
+          
+       		
+    }
+    */
     
     private String processCert(X509Certificate cert)
     {
@@ -298,6 +345,11 @@ public class CACertManagerActivity extends Activity implements OnEulaAgreedTo, R
 	        	  {
 	        		  if (cert.getIssuerDN().toString().indexOf(mKeyword)!=-1
 	        			  && cert.getSubjectDN().toString().indexOf(mKeyword)!=-1)
+	        			  alCerts.add(cert);
+	        		  
+	        		  String certtext = cert.getIssuerDN().toString().toLowerCase();
+	        		  certtext.concat(cert.getSubjectDN().toString().toLowerCase());
+	        		  if (certtext.contains(mKeyword))
 	        			  alCerts.add(cert);
 	        	  }
 	          }
