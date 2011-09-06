@@ -1,0 +1,4 @@
+
+Tracking useful commands for manipulating the Android cacerts.bks keytool
+
+keytool -keystore cacerts.bks -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -storepass changeit 
