@@ -75,16 +75,9 @@ public class CACertManagerActivity extends Activity implements OnEulaAgreedTo, R
         Eula.show(this);
         
         setContentView(R.layout.main);
+     
         
-        String version = "";
-        
-        try
-        {
-        	version = " v" + getPackageManager().getPackageInfo(this.getPackageName(), 0 ).versionName;
-        }
-        catch (Exception e){}
-        
-        this.setTitle(getString(R.string.app_name) + version);
+        this.setTitle(getString(R.string.app_name));
         
         mListCerts = (ListView)findViewById(R.id.listCerts);
 
@@ -400,7 +393,7 @@ public class CACertManagerActivity extends Activity implements OnEulaAgreedTo, R
 	    		return true;
 	    		
 	    	case R.id.menu_about:
-	    		showDialog(getString(R.string.about));
+	    		showAbout();
 	    		return true;
 	    	
 	    	case R.id.menu_help:
@@ -479,6 +472,30 @@ public class CACertManagerActivity extends Activity implements OnEulaAgreedTo, R
              .create().show();
 		}
 
+		private void showAbout ()
+		{
+			StringBuffer about = new StringBuffer();
+			
+			about.append(getString(R.string.app_name));
+			
+			   
+	        String version = "";
+	        
+	        try
+	        {
+	        	version = " v" + getPackageManager().getPackageInfo(this.getPackageName(), 0 ).versionName;
+	        	about.append(version);
+	        }
+	        catch (Exception e){}
+			
+
+			about.append("\n\n");
+			
+	        
+			about.append(getString(R.string.about));
+			
+			showDialog(about.toString());
+		}
 
 		@Override
 		protected void onDestroy() {
