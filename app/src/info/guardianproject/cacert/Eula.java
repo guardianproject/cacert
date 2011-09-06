@@ -34,9 +34,9 @@ import java.io.Closeable;
  * on your activity.
  */
 class Eula {
-    private static final String ASSET_EULA = "EULA";
-    private static final String PREFERENCE_EULA_ACCEPTED = "eula.accepted";
-    private static final String PREFERENCES_EULA = "eula";
+    public static final String ASSET_EULA = "EULA";
+    public static final String PREFERENCE_EULA_ACCEPTED = "eula.accepted";
+    public static final String PREFERENCES_EULA = "eula";
 
     /**
      * callback to let the activity know when the user has accepted the EULA.

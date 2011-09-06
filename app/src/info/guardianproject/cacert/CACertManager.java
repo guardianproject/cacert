@@ -138,8 +138,6 @@ public class CACertManager {
     	
     }
     
-    //mount -o rw,remount -t yaffs2 /dev/block/mtdblock3 /system
-    
     public void remountSystemRO () throws IOException
     {
     	Process p = Runtime.getRuntime().exec("su");

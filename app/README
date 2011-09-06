@@ -4,4 +4,6 @@
 Certificate Authority Manager for Android
 v0.0.1
 
-Project developed to allow users to browse, search, backup, restore and delete certificates from their Android cacerts.bks store.
+Project developed to allow users to browse, search, backup, restore and delete certificates
+from their Android cacerts.bks store.
+

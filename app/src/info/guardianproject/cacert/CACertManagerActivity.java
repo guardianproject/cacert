@@ -4,6 +4,8 @@
 package info.guardianproject.cacert;
 
 
+import info.guardianproject.cacert.Eula.OnEulaAgreedTo;
+
 import java.io.File;
 import java.io.IOException;
 import java.security.KeyStoreException;
@@ -18,10 +20,16 @@ import javax.security.auth.x500.X500Principal;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,7 +46,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CACertManagerActivity extends Activity implements OnItemClickListener, OnItemLongClickListener {
+public class CACertManagerActivity extends Activity implements OnEulaAgreedTo, Runnable, OnItemClickListener, OnItemLongClickListener {
 	
 	public static final String TAG = "CACert";
 	
@@ -57,6 +65,8 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
     private  ArrayList<X509Certificate> alCerts;
     private X509Certificate mSelectedCert;
     
+    private ProgressDialog pd;
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +75,7 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
         Eula.show(this);
         
         setContentView(R.layout.main);
-
+        
         String version = "";
         
         try
@@ -94,48 +104,6 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
     }
     
     
-    
-    private void loadList (String keyword) throws Exception
-    {
-    	
-    	  Enumeration<String> aliases = mCertMan.getCertificateAliases();
-          
-          alCerts = new ArrayList<X509Certificate>();
-          
-          while (aliases.hasMoreElements())
-          {
-        	  X509Certificate cert = (X509Certificate)mCertMan.getCertificate(aliases.nextElement());
-        	  
-        	  if (keyword == null || keyword.length() == 0)
-        		  alCerts.add(cert);
-        	  else
-        	  {
-        		  if (cert.getIssuerDN().toString().indexOf(keyword)!=-1
-        			  && cert.getSubjectDN().toString().indexOf(keyword)!=-1)
-        			  alCerts.add(cert);
-        	  }
-          }
-          
-          if (alCerts.size() == 0)
-          {
-        	  Toast.makeText(this, getString(R.string.no_certificates_matched_the_search), Toast.LENGTH_SHORT).show();
-          }
-         
-          String[] names = new String[alCerts.size()];
-          int i = 0;
-          
-          for (X509Certificate cert : alCerts)
-          {
-          	names[i++] = processCert(cert);
-          			
-          }
-          
-          mListCerts.setAdapter(new ArrayAdapter<String>(this,
-       				android.R.layout.simple_list_item_1, names));
-          
-       		
-    }
-    
     private String processCert(X509Certificate cert)
     {
     	StringBuffer buff = new StringBuffer();
@@ -160,7 +128,7 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
             mCertMan.delete(cert);
     		showAlert(getString(R.string.success_remove));
     		
-    		loadList(mKeyword);
+    		doLoadList();
     	}
     	catch (Exception e)
     	{
@@ -172,6 +140,13 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
     {
     	 LayoutInflater factory = LayoutInflater.from(this);
          final View textEntryView = factory.inflate(R.layout.alert_dialog_text_entry, null);
+
+         if (mKeyword != null)
+         {
+        	 EditText eText = ((android.widget.EditText)textEntryView.findViewById(R.id.dialog_edit));
+        	 eText.setText(mKeyword);
+         }
+         
          new AlertDialog.Builder(this)
              .setTitle(getString(R.string.app_name))
              .setView(textEntryView)
@@ -184,7 +159,7 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
                  	
                  	try
                  	{
-                 		loadList(mKeyword);
+                 		doLoadList();
                  	}
                  	catch (Exception e){}
                  	
@@ -219,7 +194,7 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
     		else
     			showAlert(getString(R.string.failure_to_save));
     		
-    		loadList(mKeyword);
+    		doLoadList();
     	}
     	catch (Exception e)
     	{
@@ -264,7 +239,7 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
     		else
     			showAlert(getString(R.string.failure_to_save));
     		
-    		loadList(mKeyword);
+    		doLoadList();
     	}
     	catch (Exception e)
     	{
@@ -277,13 +252,82 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
 	protected void onResume() {
 		super.onResume();
 		
+		  final SharedPreferences preferences = getSharedPreferences(Eula.PREFERENCES_EULA,
+	                Activity.MODE_PRIVATE);
+		  
+	        if (preferences.getBoolean(Eula.PREFERENCE_EULA_ACCEPTED, false)) {
+		
+	        	loadKeystore();
+	        	doLoadList ();
+	        }
+	}
+			
+	private void loadKeystore ()
+	{
+		try
+    	{
+    		mCertMan.load(CACERT_SYSTEM_PATH, DEFAULT_PASS);
+    	}
+    	catch (Exception e){
+    		showAlert(getString(R.string.error_loading_certs) + e.getMessage());
+			Log.e(TAG,"error loading",e);
+    	}
+	}
+	private void doLoadList ()
+	{
+		 pd = ProgressDialog.show(this, "Working..", getString(R.string.loading_cacert_keystore_from_system), true,
+                 false);
+		   
+	 
+		 Thread thread = new Thread (this);
+		 thread.start();
+	}
+	
+	public void run ()
+	{
 		try 
 		{
-			showAlert(getString(R.string.loading_cacert_keystore_from_system));
-
-			mCertMan.load(CACERT_SYSTEM_PATH, DEFAULT_PASS);
-			loadList(mKeyword);
+			Looper.prepare();
 			
+			
+			
+			 Enumeration<String> aliases = mCertMan.getCertificateAliases();
+	          
+	          alCerts = new ArrayList<X509Certificate>();
+	          
+	          while (aliases.hasMoreElements())
+	          {
+	        	  X509Certificate cert = (X509Certificate)mCertMan.getCertificate(aliases.nextElement());
+	        	  
+	        	  if (mKeyword == null || mKeyword.length() == 0)
+	        		  alCerts.add(cert);
+	        	  else
+	        	  {
+	        		  if (cert.getIssuerDN().toString().indexOf(mKeyword)!=-1
+	        			  && cert.getSubjectDN().toString().indexOf(mKeyword)!=-1)
+	        			  alCerts.add(cert);
+	        	  }
+	          }
+	          
+	          if (alCerts.size() == 0)
+	          {
+	        	  Toast.makeText(this, getString(R.string.no_certificates_matched_the_search), Toast.LENGTH_SHORT).show();
+	          }
+	         
+	          String[] names = new String[alCerts.size()];
+	          int i = 0;
+	          
+	          for (X509Certificate cert : alCerts)
+	          {
+	          	names[i++] = processCert(cert);
+	          			
+	          }
+	          
+	          Message msg = new Message();
+	          msg.getData().putStringArray("names", names);
+	          pdLoadList.sendMessage(msg);
+			
+			pdDialogDismiss.sendEmptyMessage(0);
 		}
 		catch (Exception e)
 		{
@@ -292,6 +336,34 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
 		}
 	}
 	
+	 private Handler pdDialogDismiss = new Handler() {
+         @Override
+         public void handleMessage(Message msg) {
+        	pd.dismiss();
+         }
+	 };
+	 
+     private Handler pdLoadList = new Handler() {
+         @Override
+         public void handleMessage(Message msg) {
+        	
+        	 if (mKeyword != null)
+        	 {
+        		   setTitle(getString(R.string.app_name) + ": " + mKeyword);
+        	 }
+        	 else
+        	 {
+        		 setTitle(getString(R.string.app_name));
+        	 }
+        	 
+        	 String[] names = msg.getData().getStringArray("names");
+        	 
+             mListCerts.setAdapter(new ArrayAdapter<String>(CACertManagerActivity.this,
+          				android.R.layout.simple_list_item_1, names));
+         }
+     };
+         
+ 
 	private void showAlert (String msg)
 	{
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
@@ -415,6 +487,35 @@ public class CACertManagerActivity extends Activity implements OnItemClickListen
 			
 			try { mCertMan.remountSystemRO(); }
 			catch (Exception e){}
+			
+		}
+		
+		@Override
+		public boolean onKeyDown(int keyCode, KeyEvent event) {
+		    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+		      
+		    	if (mKeyword != null)
+		    	{
+		    		mKeyword = null;
+		    		try {
+		    			doLoadList();
+		    		}
+		    		catch (Exception e){}
+		    		
+		    		return true;
+		    	}
+		    	
+		    }
+		    return super.onKeyDown(keyCode, event);
+		}
+
+
+
+		@Override
+		public void onEulaAgreedTo() {
+		
+			loadKeystore();
+			doLoadList();
 			
 		}
     
