@@ -3,6 +3,10 @@ Overview
 - Began with cacert.bks from Android 2.3 "Gingerbread" ROM in SDK/Emulator
 - did not include CNNIC by default: https://bugzilla.mozilla.org/show_bug.cgi?id=542689
 
-2011-09-01
+2011-09-01 Nathan Freitas nathan@guardianproject.info
 - DigiNotar removed. See: https://blog.torproject.org/blog/diginotar-debacle-and-what-you-should-do-about-it
-> keytool -keystore cacerts.bks -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -storepass changeit -delete -alias 81
+cmd > keytool -keystore cacerts.bks -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -storepass changeit -delete -alias 81
+
+2011-09-06 Nathan Freitas nathan@guardianproject.info
+- CACert.org Class3 Root CA Added: http://www.cacert.org/index.php?id=3
+cmd > keytool -keystore cacerts.bks -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -storepass changeit -importcert -file certs/cacert/class3.crt -alias cacert
