@@ -1,7 +1,7 @@
 Guardian Project Curated CACert
 Created: 2011-09-01
 
-In response to growing concerns about the less-than trustworthy state of the global Certificate Authority ecosystem, we have decided to began curating our own CACert keystore for us on Android devices. The process by which Google and/or the Android project includes or excludes root authorities is not entirely transparent, and the decisions they make may not be in the same interests as ours. In addition, it seems that to modify the CACert.bks file, it would require an Android system update, which tend to happen only on very long intervals.
+In response to growing concerns about the less-than trustworthy state of the global Certificate Authority ecosystem, we have decided to began curating our own CACert keystore for use on Android devices. The process by which Google and/or the Android project includes or excludes root authorities is not entirely transparent, and the decisions they make may not be in the same interests as ours. In addition, it seems that to modify the CACert.bks file, it would require an Android system update, which tend to happen only on very long intervals.
 
 (More on the "DigiNotar Debacle" here: https://blog.torproject.org/blog/diginotar-debacle-and-what-you-should-do-about-it)
 
