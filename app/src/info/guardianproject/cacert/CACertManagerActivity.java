@@ -223,7 +223,7 @@ public class CACertManagerActivity extends Activity implements OnEulaAgreedTo, R
     		
     		mCertMan.save(fileBak.getAbsolutePath(), DEFAULT_PASS);
     		
-    		boolean success = mCertMan.remountRWandCopy(fileBak.getAbsolutePath(), CACERT_SYSTEM_PATH);
+    		boolean success = AndroidSystemUtils.remountRWandCopy(fileBak.getAbsolutePath(), CACERT_SYSTEM_PATH);
     		
     		Thread.sleep(1000);//wait one second
     		
@@ -268,7 +268,7 @@ public class CACertManagerActivity extends Activity implements OnEulaAgreedTo, R
 
     		String bakPath = new File(getFilesDir(),CACERT_BACKUP_PATH).getAbsolutePath();
 
-    		boolean success = mCertMan.remountRWandCopy(bakPath, CACERT_SYSTEM_PATH);
+    		boolean success = AndroidSystemUtils.remountRWandCopy(bakPath, CACERT_SYSTEM_PATH);
     		
     		Thread.sleep(1000);//wait one second
     		
@@ -455,8 +455,6 @@ public class CACertManagerActivity extends Activity implements OnEulaAgreedTo, R
 	    	return super.onOptionsItemSelected(item);
 	    }
 
-
-
 		@Override
 		public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
@@ -554,7 +552,7 @@ public class CACertManagerActivity extends Activity implements OnEulaAgreedTo, R
 			
 			super.onDestroy();
 			
-			try { mCertMan.remountSystemRO(); }
+			try { AndroidSystemUtils.remountSystemRO(); }
 			catch (Exception e){}
 			
 		}

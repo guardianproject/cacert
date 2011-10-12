@@ -2,8 +2,11 @@
 /* See LICENSE for licensing information */
 
 Certificate Authority Manager for Android
-v0.0.1
+v0.0.2
 
 Project developed to allow users to browse, search, backup, restore and delete certificates
 from their Android cacerts.bks store.
 
+Icon from Author: ArtistsValley, http://www.artistsvalley.com/
+http://www.iconspedia.com/icon/certificate-312-.html
+License: Free for non commercial use.

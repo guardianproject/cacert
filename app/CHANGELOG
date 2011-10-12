@@ -1,4 +1,7 @@
 
+v0.0.2
+- added support for Android 1.6 and above (Brian Kemp!)
+
 v0.0.1
 - loads and parses certificate file from /system
 - backs up current /system file to app data space
