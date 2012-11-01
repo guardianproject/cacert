@@ -10,7 +10,7 @@ certAliasNum=0
 
 for file in `dir -d /etc/ssl/certs/*.pem` ; do
 	certAliasNum=$((certAliasNum+1))
-	keytool -importcert -v -trustcacerts -file "$file" -alias $certAliasNum -keystore "$certStore" -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath "libs/bcprov-jdk15on-147.jar" -storetype BKS -storepass changeit -noprompt
-	keytool -list -v -keystore "$certStore" -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath "libs/bcprov-jdk15on-147.jar" -storepass changeit -alias $certAliasNum >> $certStore.txt
+	keytool -importcert -v -trustcacerts -file "$file" -alias $certAliasNum -keystore "$certStore" -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath "libs/bcprov-jdk16-145.jar" -storetype BKS -storepass changeit -noprompt
+	keytool -list -v -keystore "$certStore" -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath "libs/bcprov-jdk16-145.jar" -storepass changeit -alias $certAliasNum >> $certStore.txt
 done
 
