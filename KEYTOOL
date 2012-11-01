@@ -1,4 +1,10 @@
 
 Tracking useful commands for manipulating the Android cacerts.bks keytool
 
-keytool -keystore cacerts.bks -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -storepass changeit 
+keytool -list -keystore cacerts.bks -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath "libs/bcprov-jdk15on-147.jar"
+
+keytool -keystore cacerts.bks -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath "libs/bcprov-jdk15on-147.jar" -storepass changeit 
+
+keytool -importcert -v -trustcacerts -file "cacert.pem" -alias ca -keystore "cacerts.bks" -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath "libs/bcprov-jdk15on-147.jar" -storetype BKS -storepass changeit
+
+
