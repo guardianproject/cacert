@@ -1,0 +1,42 @@
+Alias name: 1
+Creation date: Nov 5, 2012
+Entry type: trustedCertEntry
+
+Owner: C=DE,ST=Hamburg,L=Hamburg,O=Chaos Computer Club e.V.,CN=jabber.ccc.de
+Issuer: O=CAcert Inc.,OU=http://www.CAcert.org,CN=CAcert Class 3 Root
+Serial number: 1064e
+Valid from: Fri Sep 07 23:45:50 IST 2012 until: Sun Sep 07 23:45:50 IST 2014
+Certificate fingerprints:
+	 MD5:  A4:5C:32:61:88:56:6F:27:37:8D:36:3C:2F:81:8F:8E
+	 SHA1: 81:55:CF:37:69:67:A4:74:17:A7:BE:AA:9B:71:2A:C6:3D:16:1D:50
+	 SHA256: 3D:2E:18:19:32:9E:32:2F:4E:DE:C7:FF:C4:67:73:C8:F3:68:CF:EC:DF:9C:DD:D3:85:02:40:9B:9E:5A:F2:C6
+	 Signature algorithm name: SHA1WithRSAEncryption
+	 Version: 3
+Alias name: 2
+Creation date: Nov 5, 2012
+Entry type: trustedCertEntry
+
+Owner: 2.5.4.13=315979-JsZkgu0CkszaR5Z7,C=US,ST=Colorado,L=Denver,O=Peter Saint-Andre,OU=StartCom Trusted Certificate Member,CN=*.jabber.org,E=hostmaster@jabber.org
+Issuer: C=IL,O=StartCom Ltd.,OU=Secure Digital Certificate Signing,CN=StartCom Class 3 Primary Intermediate Server CA
+Serial number: 8b3
+Valid from: Thu Dec 16 04:16:50 IST 2010 until: Sun Dec 16 18:00:37 IST 2012
+Certificate fingerprints:
+	 MD5:  46:BF:C1:8C:50:EE:63:B5:79:0E:49:D3:59:B3:13:8F
+	 SHA1: 27:2F:54:AF:84:8D:96:60:3A:52:61:9C:C6:29:A6:90:A3:83:5C:3B
+	 SHA256: 0A:36:A9:A2:99:A7:30:68:D5:03:2A:DB:0E:B4:A4:46:F2:CA:C1:67:77:45:7C:20:3F:9F:B4:BB:D8:01:DC:93
+	 Signature algorithm name: SHA1WithRSAEncryption
+	 Version: 3
+Alias name: 3
+Creation date: Nov 5, 2012
+Entry type: trustedCertEntry
+
+Owner: C=US,ST=California,L=Mountain View,O=Google Inc,CN=talk.google.com
+Issuer: C=US,O=Google Inc,CN=Google Internet Authority
+Serial number: 31fc054f000000005b32
+Valid from: Tue Jun 05 06:23:35 IST 2012 until: Wed Jun 05 06:33:35 IST 2013
+Certificate fingerprints:
+	 MD5:  55:7A:3D:E9:12:31:99:8B:E4:FB:F9:23:15:30:0B:F0
+	 SHA1: 78:33:DA:4B:3A:16:42:E6:80:D7:F8:E5:8F:D9:9E:D3:14:93:B7:90
+	 SHA256: BC:4D:98:04:6B:CC:F7:BC:50:B1:EB:6D:0D:57:B0:6E:A5:A0:E3:2C:EE:76:CD:30:79:79:E5:09:90:C3:4D:54
+	 Signature algorithm name: SHA1WithRSAEncryption
+	 Version: 3
