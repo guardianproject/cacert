@@ -1,5 +1,12 @@
 #!/bin/bash
 #This script creates an Android compatibility certificate store from the current installed Debian certs in /etc/ssl/certs
+#
+
+if [ -z "$1" ]; then
+    echo "./pemsToAndroid.sh certstore.bks \"/path/to/pems/*.pem\""
+    echo "EXAMPLE: ./pemsToAndroid.sh debiancacertstore.bks \"/etc/ssl/certs/*.pem\""
+    exit 1
+fi
 
 certStore=$1
 pemPath="$2"
