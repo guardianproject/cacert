@@ -26,22 +26,28 @@ in Android.
     make
 ```
 
+The resulting keystore will be in `stores/debiancacerts.bks` ready to be
+imported into an Android project.
+
+Add it as a raw resource to your project, then use something like the following
+to load it:
+
+```java
+    mTrustStore = KeyStore.getInstance("BKS");
+    in = mContext.getResources().openRawResource(R.raw.cacerts);
+    mTrustStore.load(in, new String("changeit").toCharArray());
+```
+
 ## Relevant Reading
 
-More on the "DigiNotar Debacle" here:
-https://blog.torproject.org/blog/diginotar-debacle-and-what-you-should-do-about-it
-
-
-In addition, we expect to develop a simple utility for rooted Android devices,
-which can download the latest version, and update the CACerts.bks when updates
-are made. We also want to reach out to developers of browser applications or
-other HTTPS or SSL Socket enabled apps for Android, to use this CACert file,
-embedded in their app, instead of the system default file. We are working to do
-this in our own apps such as Gibberbot and Orweb today.
-
+* [DigiNotar Debacle](https://blog.torproject.org/blog/diginotar-debacle-and-what-you-should-do-about-it)
+* [Your app shouldn't suffer SSL's problems](http://thoughtcrime.org/blog/authenticity-is-broken-in-ssl-but-your-app-ha/)
+* [Unifying Key Store Access in ICS ](http://android-developers.blogspot.com/2012/03/unifying-key-store-access-in-ics.html)
+* [ICS Trust Store Implementation](http://nelenkov.blogspot.com/2011/12/ics-trust-store-implementation.html)
 
 ## Credits
 
 We would like to ack [Open WhisperSystems](http://whispersystems.org/) as an inspiration for this, as they were
 able to push out a small patch through their WhisperCore update tool in order
 to modify the keystore to remove DigiNotar.
+
