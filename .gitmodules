@@ -1,0 +1,3 @@
+[submodule "ca-certificates"]
+	path = ca-certificates
+	url = git://git.debian.org/git/collab-maint/ca-certificates.git
