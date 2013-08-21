@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Utviklet av Guardian-prosjektet\nhttps://guardianproject.info\nGPL v3 Lisensiert 2011</string>
+  <string name="help">!PRIVILIGERTE RETTIGHETER PÅKREVET!\n\nDette programmet tillater deg å utforske, lagre, gjenopprette fra kopi og slette oppføringer fra sertifiseringsinstans for sertifikater fra ditt nøkkelvelv.\n\nTrykk på sertifikat for å se ytterligere informasjon.\n\nTrykk lenge for å slette, gå så til Meny-&gt;Lagre for å gjøre ditt valg permanent.\n\nHvis du har problemer med å lagre, prøv programmet \'Root Explorer\' og bruk det til å montere /system med skriverettigheter.</string>
+  <string name="no_certificates_matched_the_search">Ingen sertifikat samsvarte med søket.</string>
+  <string name="success_remove">Suksess! Sertifikatet har blitt fjernet fra nøkkelvelvet! Endringen vil bli permanent når du trykker \'Lagre\'</string>
+  <string name="error_deleting_cert">Feil ved sletting av sertifikat:</string>
+  <string name="enter_keyword_to_search_for">Skriv inn søkeord</string>
+  <string name="search">Søk</string>
+  <string name="cancel">Avbryt</string>
+  <string name="enter_a_cert_alias_to_delete">Skriv inn et alias for sertifikat for å slette</string>
+  <string name="delete">Slett</string>
+  <string name="success_cacert_keystore_saved_to_system">Suksess! CACert-nøkkelvelvet lagret system:</string>
+  <string name="failure_to_save">Feil: Nøkkelvelv ikke lagret.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Suksess! System CACert nøkkelvelv lagret til:</string>
+  <string name="success_system_cacert_restored_from">Suksess! System CACert gjennopprettet fra:</string>
+  <string name="loading_cacert_keystore_from_system">Laster CACert-nøkkelvelv fra /system</string>
+  <string name="error_loading_certs">Feil ved lasting av sertifikat:</string>
+  <string name="are_you_sure_delete">Er du sikker på at du vil slette dette sertifikatet?\n</string>
+  <string name="expires">Utløper:</string>
+  <string name="serial">Kode:</string>
+  <string name="eula_title">Du samtykker til:</string>
+  <string name="eula_accept">Godta</string>
+  <string name="eula_refuse">Nekt</string>
+</resources>
