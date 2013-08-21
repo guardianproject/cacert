@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Được phát triển bởi the Guardian Project\nhttps://guardianproject.info\nGPL v3 Licensed 2011</string>
+  <string name="help">!ỨNG DỤNG NÀY YÊU CẦU QUYỀN ROOT!\n\nỨng dụng này cho phép bạn lướt web, sao lưu, phục hồi và xóa các khung thông tin từ cửa hàng xác nhận chứng chỉ của hệ thống.\n\nChạm vào một chứng chỉ để xem thêm thông tin.\n\nChạm vào và nhấn giữ để xóa, sau đó truy cập Menu-&gt;Lưu để thao tác được áp dụng.\n\nNếu bạn gặp vấn đề khi lưu dữ liệu, hãy thử dùng ứng dụng \'Root Explorer\' để kết nối với /hệ thống nhằm điều khiển chế độ Đọc-Ghi dữ liệu</string>
+  <string name="no_certificates_matched_the_search">Không có chứng chỉ nào khớp với phần tìm kiếm</string>
+  <string name="success_remove">Thành công! Chứng chỉ đã bị loại bỏ khỏi cửa hàng khóa dữ liệu! Bây giờ bạn phải \'Lưu\" để điều này có hiệu lực.</string>
+  <string name="error_deleting_cert">lỗi khi xóa chứng chỉ:</string>
+  <string name="enter_keyword_to_search_for">Điền vào cụm từ khóa để tìm kiếm</string>
+  <string name="search">Tìm kiếm</string>
+  <string name="cancel">Hủy bỏ</string>
+  <string name="enter_a_cert_alias_to_delete">Điền vào một tên đại diện cho chứng chỉ để xóa</string>
+  <string name="delete">Xóa</string>
+  <string name="success_cacert_keystore_saved_to_system">Thành công! Cửa hàng khóa dữ liệu CACert đã được lưu vào hệ thống:</string>
+  <string name="failure_to_save">Lỗi: Cửa hàng khóa dữ liệu vẫn chưa được lưu.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Thành công! Cửa hàng khóa dữ liệu CACert thuộc hệ thống đã được sao lưu vào:</string>
+  <string name="success_system_cacert_restored_from">Thành công! Cửa hàng khóa dữ liệu CACert đã được phục hồi từ:</string>
+  <string name="loading_cacert_keystore_from_system">Đang tải Cửa hàng khóa dữ liệu CACert từ /hệ thống</string>
+  <string name="error_loading_certs">Lỗi khi tải các chứng chỉ:</string>
+  <string name="are_you_sure_delete">Bạn có chắc muốn xóa chứng chỉ này?\n</string>
+  <string name="expires">Ngày hết hạn:</string>
+  <string name="serial">Số mã:</string>
+  <string name="eula_title">Bạn đồng ý với:</string>
+  <string name="eula_accept">Chấp thuận</string>
+  <string name="eula_refuse">Từ chối</string>
+</resources>
