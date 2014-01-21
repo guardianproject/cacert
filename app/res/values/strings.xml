@@ -22,13 +22,13 @@
     
     <string name="delete">Delete</string>
     
-    <string name="success_cacert_keystore_saved_to_system">Success! CACert keystore saved system:</string>
+    <string name="success_cacert_keystore_saved_to_system">Success! CACert keystore saved to system:</string>
     
     <string name="failure_to_save">Error: The keystore was not saved.</string>
     
     <string name="success_system_cacert_keystore_backed_up_to">Success! System CACert keystore backed up to: </string>
     
-    <string name="success_system_cacert_restored_from">Success! System CACert restored from: </string>
+    <string name="success_system_cacert_restored_from">Success! System CACert keystore restored from: </string>
     
     <string name="loading_cacert_keystore_from_system">Loading CACert keystore from /system</string>
     
