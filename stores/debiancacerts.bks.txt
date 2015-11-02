@@ -1,5 +1,0 @@
-keytool error: java.lang.Exception: Keystore file does not exist: stores/debiancacerts.bks
-java.lang.Exception: Keystore file does not exist: stores/debiancacerts.bks
-	at sun.security.tools.KeyTool.doCommands(KeyTool.java:738)
-	at sun.security.tools.KeyTool.run(KeyTool.java:340)
-	at sun.security.tools.KeyTool.main(KeyTool.java:333)
