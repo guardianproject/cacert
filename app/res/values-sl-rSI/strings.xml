@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Razvili pri Guardian Project\nhttps://guardianproject.info\nGPL v3, 2011</string>
+  <string name="help">!TA APLIKACIJA ZAHTEVA KORENSKE (ROOT) PRAVICE!\n\nTa aplikacija omogoča brskanje po, varnostno kopiranje, obnavljanje in brisanje vnosov iz vaše sistemske CA shrambe ključev.\n\nDotaknite se certifikata, da boste videli podrobnosti o njem.\n\nDolgo ga pridržite za izbris, nato uporabite Menu-&gt;Shrani, da naredite spremembe trajne.\n\nČe imate težave pri shranjevanju, poizkusite \'Root Explorer\' in z njim priklopite vaše /system s pravicami za branje in pisanje.</string>
+  <string name="no_certificates_matched_the_search">Nobena potrdila niso ustrezala iskanju</string>
+  <string name="success_remove">Potrdilo je bilo uspešno odstranjeno iz shrambe ključev! Zdaj morate le še shraniti stanje, da bo tako tudi ostalo.</string>
+  <string name="error_deleting_cert">napaka pri brisanju potrdila:</string>
+  <string name="enter_keyword_to_search_for">Vnesite iskano besedo:</string>
+  <string name="search">Išči</string>
+  <string name="cancel">Prekini</string>
+  <string name="enter_a_cert_alias_to_delete">Vnesite vzdevek potrdila za izbris</string>
+  <string name="delete">Zbriši</string>
+  <string name="success_cacert_keystore_saved_to_system">Zaključeno! CACert shramba ključev shranjena v sistem:</string>
+  <string name="failure_to_save">Napaka: stanje v shrambi ključev ni bilo shranjeno.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Uspešno je bila napravljena varnostna kopija sistemske CACert shrambe ključev na:</string>
+  <string name="success_system_cacert_restored_from">Zaključeno! Sistemska CACert shramba ključev obnovljena iz:</string>
+  <string name="loading_cacert_keystore_from_system">Nalagam CACert shrambo ključev z /system</string>
+  <string name="error_loading_certs">Napaka pri nalaganju potrdil:</string>
+  <string name="are_you_sure_delete">Ali ste prepričani, da želite izbrisati to potrdilo?
+</string>
+  <string name="expires">Poteče:</string>
+  <string name="serial">Serijska:</string>
+  <string name="eula_title">Strinjate se z:</string>
+  <string name="eula_accept">Sprejmi</string>
+  <string name="eula_refuse">Zavrni</string>
+</resources>

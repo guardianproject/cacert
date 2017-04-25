@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Entwickelt vom Guardian Projekt\nhttps://guardianproject.info\nGPL v3 Lizenziert 2011</string>
+  <string name="help">!DIESE APP BENÖTIGT ROOT-ZUGRIFF!\n\nDiese App erlaubt es Ihnen, Einträge aus dem systeminternen Schlüsselmagazin der Zertfizierungsstelle anzusehen, abzuspeichern, zu restaurieren oder zu löschen.\n\nZertifikat antippen, um Details anzusehen.\n\nLang tippen um zu löschen, dann Menu-&gt;Speichern um dies beizubehalten.\n\nSollten Sie Probleme beim Speichern haben, probieren Sie die App \'Root Explorer\' und nutzen Sie diese, um /system im Lese-Schreib-Modus zu mounten.</string>
+  <string name="no_certificates_matched_the_search">Keine zur Suche passenden Zertifikate</string>
+  <string name="success_remove">Erfolg! Das Zertifikat wurde aus dem Schlüsselmagazin entfernt! Sie müssen nun \"Speichern\", um dies beständig beizubehalten.</string>
+  <string name="error_deleting_cert">Fehler, folgendes Zeritifkat zu löschen:</string>
+  <string name="enter_keyword_to_search_for">Geben Sie ein Schlüsselwort für die Suche ein</string>
+  <string name="search">Suche</string>
+  <string name="cancel">Abbrechen</string>
+  <string name="enter_a_cert_alias_to_delete">Geben Sie ein zu löschendes Zertifikatalias ein</string>
+  <string name="delete">Löschen</string>
+  <string name="success_cacert_keystore_saved_to_system">Erfolg! CACert Schlüsselmagazin gespeichert:</string>
+  <string name="failure_to_save">Fehler: Das Schlüsselmagazin wurde nicht gespeichert.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Erfolg! CACert-System Schlüsselmagazin gespeichert nach:</string>
+  <string name="success_system_cacert_restored_from">Erfolg! CACert-System Schlüsselmagazin wiederhergestellt von:</string>
+  <string name="loading_cacert_keystore_from_system">CACert Schlüsselmagazin wird geladen von /system</string>
+  <string name="error_loading_certs">Fehler beim laden der Zertifikate:</string>
+  <string name="are_you_sure_delete">Sind Sie sicher, dass Sie dieses Zertifikat löschen wollen?
+</string>
+  <string name="expires">Läuft ab:</string>
+  <string name="serial">Seriennummer:</string>
+  <string name="eula_title">Sie sind damit einverstanden:</string>
+  <string name="eula_accept">Annehmen</string>
+  <string name="eula_refuse">Ablehnen</string>
+</resources>

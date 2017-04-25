@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Guardian プロジェクトによって開発されました\nhttps://guardianproject.info\nGPL v3 Licensed 2011</string>
+  <string name="help">!このアプリはROOTが必要です!\n\nこのアプリは、あなたのシステムの認証局キーストアからエントリーを閲覧、バックアップ、復元、および削除することができます。\n\nさらに多くのデータを表示するには、証明書をタップしてください。\n\n削除するには長押ししてください。そして、永続化するために メニュー-&gt;保存を使用してください。\n\n保存中に問題がある場合、\'Root Explorer\' アプリを試してみてください。それを使用して、/system を読み書きモードでマウントしてください</string>
+  <string name="no_certificates_matched_the_search">検索に一致する証明書はありません</string>
+  <string name="success_remove">成功しました! 証明書がキーストアから削除されました! これを永続的するために \'保存\' する必要があります。</string>
+  <string name="error_deleting_cert">証明書の削除中にエラー:</string>
+  <string name="enter_keyword_to_search_for">検索するキーワードを入力してください</string>
+  <string name="search">検索</string>
+  <string name="cancel">キャンセル</string>
+  <string name="enter_a_cert_alias_to_delete">削除する証明書のエイリアスを入力してください</string>
+  <string name="delete">削除</string>
+  <string name="success_cacert_keystore_saved_to_system">成功! 証明書キーストアをシステムに保存しました:</string>
+  <string name="failure_to_save">エラー: キーストアは保存できませんでした。</string>
+  <string name="success_system_cacert_keystore_backed_up_to">成功! 証明書キーストアをバックアップしました:</string>
+  <string name="success_system_cacert_restored_from">成功! 証明書キーストアを復元しました:</string>
+  <string name="loading_cacert_keystore_from_system">/system から証明書キーストアをロードしています</string>
+  <string name="error_loading_certs">証明書のロード中にエラー:</string>
+  <string name="are_you_sure_delete">この証明書を削除してもよろしいですか?
+</string>
+  <string name="expires">失効:</string>
+  <string name="serial">シリアル:</string>
+  <string name="eula_title">同意します:</string>
+  <string name="eula_accept">同意する</string>
+  <string name="eula_refuse">同意しない</string>
+</resources>

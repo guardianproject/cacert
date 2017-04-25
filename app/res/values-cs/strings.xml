@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Vytvořil Guardian Project\nhttps://guardianproject.info\nGPL v3 Licencováno 2011</string>
+  <string name="help">!APLIKACE VYŽADUJE ROOT!\n\nTato aplikace vám umožní prohlížet, zálohovat, obnovit a smazat záznamy z vašeho systémového Certifikate Authority úložiště klíčů.\n\nKliknutím na certifikát zobrazíte víc informací.\n\nDlouhý stiskem smažete, poté klikněte Menu-&gt;Uložit pro trvalé uplatnění změn.\n\nPokud máte problém s ukládáním, zkuste aplikaci \"Root Explorer\" a použijte ji pro připojení vašeho /system v Read-Write režimu.</string>
+  <string name="no_certificates_matched_the_search">Žádné certifikáty nevyhovují hledání.</string>
+  <string name="success_remove">Úspěch! Certifikát byl odstraněn z úložiště klíčů! Nyní musíte kliknout na \"Uložit\" pro trvalé uplatnění změn.</string>
+  <string name="error_deleting_cert">Chyba odstraňování certifikátu:</string>
+  <string name="enter_keyword_to_search_for">Zadejte klíčové slovo pro hledání</string>
+  <string name="search">Hledat</string>
+  <string name="cancel">Zrušit</string>
+  <string name="enter_a_cert_alias_to_delete">Zadejte alias certifikátu, který odstranit</string>
+  <string name="delete">Odstranit</string>
+  <string name="success_cacert_keystore_saved_to_system">Úspěch! CACert úložiště klíčů uloženo do systému:</string>
+  <string name="failure_to_save">Chyba: Úložiště klíču nebylo uloženo.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Úspěch! Systémové CACert úložiště klíčů zazálohováno do:</string>
+  <string name="success_system_cacert_restored_from">Úspěch! Systémové CACert úložiště klíčů obnoveno z:</string>
+  <string name="loading_cacert_keystore_from_system">Načítání CACert úložiště klíčů z /system</string>
+  <string name="error_loading_certs">Chyba načítání certifikátů:</string>
+  <string name="are_you_sure_delete">Opravdu chcete smazat tento certifikát?
+</string>
+  <string name="expires">Expiruje:</string>
+  <string name="serial">Sériové číslo:</string>
+  <string name="eula_title">Souhlasíte, že:</string>
+  <string name="eula_accept">Přijmout</string>
+  <string name="eula_refuse">Odmítnout</string>
+</resources>

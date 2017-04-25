@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Stworzone przez Guardian Project\nhttps://guardianproject.info\nLicencja GPL v3 2011</string>
+  <string name="help">!TA APLIKACJA WYMAGA ROOTA!\n\nTa aplikacja umożliwia przeglądanie, tworzenie kopii zapasowych, przywracanie i usuwanie wpisów z urzędu certyfikacji kluczy z twojego systemu.\n\nWybierz certyfikat, aby wyświetlić więcej danych.\n\nNaciśnij dłużnej, aby usunąć, użyj Menu-&gt;Zapisz aby zachować to na stałe.\n\nJeśli masz problemy z zapisem, wypróbuj aplikację \'Root Explorer\' i użyj ją, aby podłączyć twój dysk /system w trybie odczytu i zapisu.</string>
+  <string name="no_certificates_matched_the_search">Nie znaleziono żadnego certyfikatu</string>
+  <string name="success_remove">Udało się! Certyfikat został usunięty z keystore! Teraz musisz nacisnąć \'Zapisz\' aby zapisać zmiany pernamentnie.</string>
+  <string name="error_deleting_cert">błąd usunięcia cert:</string>
+  <string name="enter_keyword_to_search_for">Wpisz frazę do szukania</string>
+  <string name="search">Szukaj</string>
+  <string name="cancel">Anuluj</string>
+  <string name="enter_a_cert_alias_to_delete">Wpisz alias certyfikatu do usunięcia</string>
+  <string name="delete">Usuń</string>
+  <string name="success_cacert_keystore_saved_to_system">Sukces! CACert keystore zapisany na systemie:</string>
+  <string name="failure_to_save">Błąd: Keystore nie został zapisany.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Sukces! Kopia zapasowa systemu CACert keystore została zapisana do:</string>
+  <string name="success_system_cacert_restored_from">Sukces! System CACert keystore został przywrócony z:</string>
+  <string name="loading_cacert_keystore_from_system">Trwa pobieranie CACert keystore z /system</string>
+  <string name="error_loading_certs">Błąd wyświetlenia certyfikatów:</string>
+  <string name="are_you_sure_delete">Czy jesteś pewny, że chcesz usunąć ten certyfikat?
+</string>
+  <string name="expires">Wygasa:</string>
+  <string name="serial">Serial:</string>
+  <string name="eula_title">Zgadzasz się na:</string>
+  <string name="eula_accept">Akceptuj</string>
+  <string name="eula_refuse">Odmów</string>
+</resources>

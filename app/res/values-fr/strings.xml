@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Développé par le Projet Guardian\nhttps://guardianproject.info\nLicence LPG v3 2011</string>
+  <string name="help">! CETTE APPLI EXIGE UN ACCÈS ROOT !\n\nCette appli vous permet de parcourir, sauvegarder, restaurer et de supprimer des entrées du magasin de clés de l\'autorité de certification de votre système.\n\nToquez un certificat pour voir plus de détails.\n\nAppuyez longuement pour supprimer, puis utilisez Menu-&gt;Enregistrer pour le rendre permanent.\n\nSi vous rencontrez un problème lors de l\'enregistrement, essayer l\'appli « Root Explorer » et utilisez-la afin de monter votre /system en mode lecture-écriture.</string>
+  <string name="no_certificates_matched_the_search">Aucun certificat ne correspond à la recherche</string>
+  <string name="success_remove">Bravo ! Le certificat a été supprimé du magasin de clés ! Vous devez maintenant  « Enregistrer » afin de rendre ce choix permanent.</string>
+  <string name="error_deleting_cert">erreur de suppression du certificat :</string>
+  <string name="enter_keyword_to_search_for">Saisir un mot-clé à rechercher</string>
+  <string name="search">Recherche</string>
+  <string name="cancel">Annuler</string>
+  <string name="enter_a_cert_alias_to_delete">Saisir un alias de certificat à supprimer</string>
+  <string name="delete">Supprimer</string>
+  <string name="success_cacert_keystore_saved_to_system">Bravo ! Le magasin de clés CACert a été enregistré sur le système :</string>
+  <string name="failure_to_save">Erreur : le magasin de clés n\'a pas été enregistré.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Bravo ! Le magasin de clés CACert du système a été enregistré vers :</string>
+  <string name="success_system_cacert_restored_from">Bravo ! Le magasin de clef CACert du système a été restauré depuis :</string>
+  <string name="loading_cacert_keystore_from_system">Chargement du magasin de clés CACert depuis /system</string>
+  <string name="error_loading_certs">Erreur de chargement des certificats :</string>
+  <string name="are_you_sure_delete">Êtes-vous certain de vouloir supprimer ce certificat ?
+</string>
+  <string name="expires">Expire le :</string>
+  <string name="serial">No de série :</string>
+  <string name="eula_title">Vous acceptez de : </string>
+  <string name="eula_accept">Accepter</string>
+  <string name="eula_refuse">Refuser</string>
+</resources>

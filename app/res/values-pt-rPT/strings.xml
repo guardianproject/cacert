@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Desenvolvido pelo Projeto Guardian\nhttps://guardianproject.info\nGPL v3 Licensed 2011</string>
+  <string name="help">!ESTA APLICAÇÃO REQUER \"ROOT\"!\n\nEsta aplicação permite-lhe navegar, efetuar cópias de segurança, restaurar e eliminar entradas a partir da sua \'keystore\' de Autoridade do Certificado do sistema.\n\nToque num certificado para ver mais dados.\n\nToque longo para eliminar, depois use Menu-&gt;Guardar para a tornar permanente.\n\nSe tiver problemas ao guardar, tente a aplicação \'Root Explorer\' e use-a para montar o seu /system no modo Ler-Gravar</string>
+  <string name="no_certificates_matched_the_search">Nenhum certificado corresponde à procura</string>
+  <string name="success_remove">Sucesso! O certificado foi removido a partir da \'keystore\'! Agora deve  \'Guardar\' para a tornar permanente.</string>
+  <string name="error_deleting_cert">Erro ao eliminar o cert.:</string>
+  <string name="enter_keyword_to_search_for">Insira a palavra-chave a procurar</string>
+  <string name="search">Procurar</string>
+  <string name="cancel">Cancelar</string>
+  <string name="enter_a_cert_alias_to_delete">Insira um pseudónimo do cert. para apagar</string>
+  <string name="delete">Eliminar</string>
+  <string name="success_cacert_keystore_saved_to_system">Sucesso! \'keystore\' da CACert guardada no sistema:</string>
+  <string name="failure_to_save">Erro: A \'keystore\' não foi guardada.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Sucesso! A \'keystore\' da CACert do sistema foi copiada: </string>
+  <string name="success_system_cacert_restored_from">Sucesso! A \'keystore\' da CACert do sistema foi restaurada de: </string>
+  <string name="loading_cacert_keystore_from_system">A carregar a \'keystore\' da CACert a partir do /sistema</string>
+  <string name="error_loading_certs">Erro ao carregar os cert.:</string>
+  <string name="are_you_sure_delete">Tem a certeza que pretende apagar este certificado?
+</string>
+  <string name="expires">Expira:</string>
+  <string name="serial">Nr. de Série:</string>
+  <string name="eula_title">Concorda com:</string>
+  <string name="eula_accept">Aceitar</string>
+  <string name="eula_refuse">Recusar</string>
+</resources>

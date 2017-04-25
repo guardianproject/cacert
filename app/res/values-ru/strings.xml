@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Разработано Guardian Project\nhttps://guardianproject.info\nGPL v3 Licensed 2011</string>
+  <string name="help">!Приложению трубуются права суперпользователя!\n\nЭто приложение преднызначено для просмотра, копирования, восстановления и удаления корневых сертификатов в системе.\n\nКоснитесь сертификата для того, чтобы увидеть подробности.\n\nНажмите долго для удаления, Потом Меню-&gt;Сохранить чтобы сохранить изменения.\n\nВ случае проблем, используйте \'Root Explorer\' чтобы примонтировать системный раздел для записи</string>
+  <string name="no_certificates_matched_the_search">По данному запросу ничего не найдено</string>
+  <string name="success_remove">Сертификат удалён успешно! Нажмите \"сохранить\" чтобы закрепить результат</string>
+  <string name="error_deleting_cert">ошибка удаления сертификата:</string>
+  <string name="enter_keyword_to_search_for">Введите слово для поиска</string>
+  <string name="search">Поиск</string>
+  <string name="cancel">Отмена</string>
+  <string name="enter_a_cert_alias_to_delete">Введите маску для удаления:</string>
+  <string name="delete">Удалить</string>
+  <string name="success_cacert_keystore_saved_to_system">Успешно! Хранилище ключей сохранено в систему:</string>
+  <string name="failure_to_save">Ошибка: хранилище ключей не сохранено</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Успешно! Резервная копя хранилища сертификатов сохранена в:</string>
+  <string name="success_system_cacert_restored_from">Успешно! Резервная копя хранилища сертификатов восстановлена из:</string>
+  <string name="loading_cacert_keystore_from_system">Загрузка хранилища ключей из системного раздела</string>
+  <string name="error_loading_certs">Ошибка загрузки сертификатов:</string>
+  <string name="are_you_sure_delete">Вы уверены, что хотите удалить сертификат?
+</string>
+  <string name="expires">Истекает:</string>
+  <string name="serial">Номер:</string>
+  <string name="eula_title">В соглашаетесь:</string>
+  <string name="eula_accept">Принять</string>
+  <string name="eula_refuse">Отказаться</string>
+</resources>

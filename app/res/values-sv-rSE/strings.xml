@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="no_certificates_matched_the_search">Inga certifikat matchade sökningen</string>
+  <string name="success_remove">Succé! Certifikatet har tagits bort från nyckelsamlingen. Nu måste du \'Spara\' för att göra det permanent.</string>
+  <string name="error_deleting_cert">fel vid radering av certifikat: </string>
+  <string name="enter_keyword_to_search_for">Ange nyckelord att söka efter</string>
+  <string name="search">Sök</string>
+  <string name="cancel">Avbryt</string>
+  <string name="enter_a_cert_alias_to_delete">Ange ett cert-alias att radera</string>
+  <string name="delete">Radera</string>
+  <string name="failure_to_save">Fel: nyckelsamlingen sparades inte.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Succé! Systemets CACert-nyckelsamling backades upp till: </string>
+  <string name="loading_cacert_keystore_from_system">Laddar CACert-nyckelsamling från /system</string>
+  <string name="error_loading_certs">Fel vid inläsning av certifikat:</string>
+  <string name="are_you_sure_delete">Är du säker på att du vill radera detta certifikatet?
+</string>
+  <string name="expires">Går ut:</string>
+  <string name="serial">Serienummer:</string>
+  <string name="eula_title">Du går med på att:</string>
+  <string name="eula_accept">Acceptera</string>
+  <string name="eula_refuse">Vägra</string>
+</resources>

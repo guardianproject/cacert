@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Desarrollado por el Guardian Project\nhttps://guardianproject.info\nLicenciado en 2011 bajo GPL v3</string>
+  <string name="help">¡ESTA APLICACIÓN REQUIERE ROOT!\n\nEsta aplicación le permite navegar, realizar copia de seguridad, restaurar y borrar entradas desde el almacenamiento de claves de la Autoridad de Certificados (CA) de su sistema.\n\nPulse en un certificado para ver más datos.\n\nMantenga pulsado para borrar, luego use Menú-&gt;Guardar para hacerlo permanente.\n\nSi está teniendo problemas al guardar, pruebe la aplicación \'Root Explorer\' y utilícela para montar su /system en modo lectura-escritura.
+If you are having trouble saving, try the app \'Root Explorer\' and use that to mount your /system into Read-Write mode</string>
+  <string name="no_certificates_matched_the_search">No se encontró ningún certificado</string>
+  <string name="success_remove">¡Terminado! ¡El certificado se ha borrado del repositorio de claves! Ahora, debe \'Guardar\' para hacer este cambio permanente.</string>
+  <string name="error_deleting_cert">error borrando certificado:</string>
+  <string name="enter_keyword_to_search_for">Introduzca una palabra clave para realizar la búsqueda</string>
+  <string name="search">Buscar</string>
+  <string name="cancel">Cancelar</string>
+  <string name="enter_a_cert_alias_to_delete">Introduzca un alias del certificado que desea borrar</string>
+  <string name="delete">Borrar</string>
+  <string name="success_cacert_keystore_saved_to_system">¡Completado! Repositorio de claves de CACert guardado en el sistema:</string>
+  <string name="failure_to_save">Error: No se ha guardado el repositorio de claves.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">¡Terminado! Se ha creado una copia de seguridad del repositorio de claves de CACert:</string>
+  <string name="success_system_cacert_restored_from">¡Completado! Repositorio de claves de CACert restaurado desde:</string>
+  <string name="loading_cacert_keystore_from_system">Cargando el repositorio de claves de CACert desde /system</string>
+  <string name="error_loading_certs">Error cargando certificados:</string>
+  <string name="are_you_sure_delete">¿Está seguro de querer borrar este certificado?</string>
+  <string name="expires">Caduca:</string>
+  <string name="serial">Número de serie:</string>
+  <string name="eula_title">Está de acuerdo con:</string>
+  <string name="eula_accept">Acepta</string>
+  <string name="eula_refuse">Rechaza</string>
+</resources>

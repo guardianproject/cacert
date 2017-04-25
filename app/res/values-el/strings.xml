@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">CACertMan</string>
+  <string name="about">Αναπτύχθηκε από τo Guardian Project\nhttps://guardianproject.info\nGPL v3 Licensed 2011</string>
+  <string name="help">!H Εφαρμογή αυτή απαιτεί ROOT! \N\ nΑυτη η εφαρμογή σας επιτρέπει να περιηγηθείτε στα αντιγράφα ασφαλείας και επαναφοράς και να διαγράψετε εγγραφές από την Αρχή Πιστοποιητικού αποθήκευσης κλειδιών του συστήματός σας.\N\NΕπιλέξτε ένα πιστοποιητικό για να δείτε περισσότερα στοιχεία.\N\ nLong πατήστε για να διαγράψετε, στη συνέχεια, χρησιμοποιήστε Μενού- &amp; gt? Αποθήκευση για να καταστεί μόνιμη \ n \ nΑν έχετε εξοικονόμηση πρόβλημα, δοκιμάστε την εφαρμογή "Root Explorer 'και να χρησιμοποιήσετε αυτή για να τοποθετήσετε σας / σύστημα σε ανάγνωσης-εγγραφής λειτουργία.</string>
+  <string name="no_certificates_matched_the_search">Δεν υπάρχουν πιστοποιητικά που ταιριάζουν στην αναζήτηση</string>
+  <string name="success_remove">Επιτυχία! Το πιστοποιητικό έχει αφαιρεθεί από την αποθήκευση κλειδιών! Τώρα θα πρέπει η «Αποθήκευση» να καταστεί μόνιμη.</string>
+  <string name="error_deleting_cert">Σφάλμα κατά τη διαγραφή πιστοποίησης:</string>
+  <string name="enter_keyword_to_search_for">Εισάγετε λέξη κλειδί για να αναζητήσετε</string>
+  <string name="search">Αναζήτηση</string>
+  <string name="cancel">Ακύρωση</string>
+  <string name="enter_a_cert_alias_to_delete">Πληκτρολογήστε ένα ψευδώνυμο πιστοποιητικου για διαγραφή</string>
+  <string name="delete">Διαγραφή</string>
+  <string name="success_cacert_keystore_saved_to_system">Επιτυχία! CAcert αποθήκευση κλειδιών αποθηκεύεται στο σύστημα:</string>
+  <string name="failure_to_save">Σφάλμα: Η αποθήκευση κλειδιών δεν αποθηκεύτηκε.</string>
+  <string name="success_system_cacert_keystore_backed_up_to">Επιτυχία! Σύστημα CAcert αποθήκευσης κλειδιών εγινε αντίγραφο ασφαλείας σε:</string>
+  <string name="success_system_cacert_restored_from">Επιτυχία! Το σύστημα CAcert αποθήκευση κλειδιών αποκαταστάθηκε από:</string>
+  <string name="loading_cacert_keystore_from_system">Φόρτωση CAcert αποθήκευση κλειδιών από /το σύστημα</string>
+  <string name="error_loading_certs">Σφάλμα κατά τη φόρτωση πιστοποιητικών:</string>
+  <string name="are_you_sure_delete">Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το πιστοποιητικό;
+
+
+
+</string>
+  <string name="expires">Λήξη:</string>
+  <string name="serial">Κωδικός:</string>
+  <string name="eula_title">Συμφωνείτε να:</string>
+  <string name="eula_accept">Αποδοχή</string>
+  <string name="eula_refuse">Αρνηση</string>
+</resources>
